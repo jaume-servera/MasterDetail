@@ -1,12 +1,13 @@
 package com.dam2023tfinal.jservera;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
@@ -14,6 +15,13 @@ import com.bumptech.glide.Glide;
 
 public class GpuAdapter extends RecyclerView.Adapter<GpuAdapter.GpuViewHolder> {
     private List<gpu> gpuList;
+    private OnItemClickListener mListener;
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+
 
     public GpuAdapter(List<gpu> gpuList) {
         this.gpuList = gpuList;
@@ -37,27 +45,19 @@ public class GpuAdapter extends RecyclerView.Adapter<GpuAdapter.GpuViewHolder> {
         holder.editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Get the position of the item in the adapter
-                int position = getAdapterPosition();
-                // Check for a valid position and call the method to start EditGpuActivity
-                if(position != RecyclerView.NO_POSITION) {
-                    // Ensure the context is indeed MainActivity before casting
-                    Context context = v.getContext();
-                    if (context instanceof MainActivity) {
-                        ((MainActivity) context).startEditGpuActivity(position);
-                    }
-                }
+                Toast.makeText(v.getContext(), "Edit button clicked", Toast.LENGTH_SHORT).show();
             }
         });
-
         // Load and set the GPU image using Glide
         //Glide.with(holder.itemView.getContext())
         //        .load(currentGpu.getImageUrl())  // Replace with the actual URL or resource for the GPU image
         //        .into(holder.gpuItemImage);
-    }
 
-    private int getAdapterPosition() {
-        return gpuList.indexOf(this);
+        holder.itemView.setOnClickListener(v -> {
+            if (mListener != null) {
+                mListener.onItemClick(position);
+            }
+        });
     }
 
     @Override
@@ -65,14 +65,18 @@ public class GpuAdapter extends RecyclerView.Adapter<GpuAdapter.GpuViewHolder> {
         return gpuList.size();
     }
 
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
+    }
+
     public class GpuViewHolder extends RecyclerView.ViewHolder {
-        
+
         public TextView gpuName, gpuPrice;
         public Button editButton;
 
         public GpuViewHolder(View view) {
             super(view);
-            
+
             gpuName = view.findViewById(R.id.gpuName);
             gpuPrice = view.findViewById(R.id.gpuPrice);
             editButton = view.findViewById(R.id.editButton);

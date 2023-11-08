@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,6 +60,13 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
+        adapter.setOnItemClickListener(position -> {
+            Intent intent = new Intent(this, ViewGpu.class);
+            gpu clickedGpu = gpuList.get(position);
+            intent.putExtra("gpu", clickedGpu);
+            startActivity(intent);
+        });
+
 
         gpu demoGpu = createDemoGpu();
 
@@ -97,9 +105,16 @@ public class MainActivity extends AppCompatActivity {
                 startNewGpuActivityForResult.launch(intent);
                 return true;
             case R.id.action_edit:
-                // Handle the "Edit" button click
-
-
+                //for each item in the recycler view, if editButton visibility is true, then set it to false and viceversa
+                for (int i = 0; i < recyclerView.getChildCount(); i++) {
+                    View view = recyclerView.getChildAt(i);
+                    Button editButton = view.findViewById(R.id.editButton);
+                    if (editButton.getVisibility() == View.VISIBLE) {
+                        editButton.setVisibility(View.GONE);
+                    } else {
+                        editButton.setVisibility(View.VISIBLE);
+                    }
+                }
                 return true;
             case R.id.listLenght:
                 Toast.makeText(this, "List lenght: " + gpuList.size(), Toast.LENGTH_SHORT).show();
@@ -122,11 +137,4 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    public void startEditGpuActivity(int position) {
-        Intent intent = new Intent(this, NewGpuActivity.class);
-        intent.putExtra("gpu", gpuList.get(position));
-        startNewGpuActivityForResult.launch(intent);
-    }
 }
-
-
