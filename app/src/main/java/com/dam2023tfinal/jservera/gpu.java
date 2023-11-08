@@ -3,6 +3,7 @@ package com.dam2023tfinal.jservera;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 public class gpu implements Serializable {
 
@@ -24,6 +25,12 @@ public class gpu implements Serializable {
     private int numberOfTransistors;
     private String dimensions;
     private int price;
+
+    private final UUID id = UUID.randomUUID();
+
+    UUID getId() {
+        return id;
+    }
 
     public byte[] getImageUrl() {
         return new byte[0];
@@ -55,6 +62,16 @@ public class gpu implements Serializable {
         return manufacturer;
     }
 
+    public int getManufacturerIndex() {
+        if (manufacturer.equals("Nvidia")) {
+            return 0;
+        } else if (manufacturer.equals("AMD")) {
+            return 1;
+        } else {
+            return 2;
+        }
+    }
+
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
     }
@@ -71,12 +88,53 @@ public class gpu implements Serializable {
         return memorySize;
     }
 
+    public int getMemorySizeIndex() {
+        if (memorySize == 1) {
+            return 0;
+        } else if (memorySize == 2) {
+            return 1;
+        } else if (memorySize == 4) {
+            return 2;
+        } else if (memorySize == 6) {
+            return 3;
+        } else if (memorySize == 8) {
+            return 4;
+        } else if (memorySize == 12) {
+            return 5;
+        } else if (memorySize == 16) {
+            return 6;
+        } else if (memorySize == 24) {
+            return 7;
+        } else if (memorySize == 32) {
+            return 8;
+        } else if (memorySize == 48) {
+            return 9;
+        } else if (memorySize == 64) {
+            return 10;
+        }
+        return 0;
+    }
+
     public void setMemorySize(int memorySize) {
         this.memorySize = memorySize;
     }
 
     public String getMemoryType() {
         return memoryType;
+    }
+
+    public int getMemoryTypeIndex() {
+        if (memoryType == "GDDR5")
+            return 0;
+        else if (memoryType == "GDDR5X")
+            return 1;
+        else if (memoryType == "GDDR6")
+            return 2;
+        else if (memoryType == "GDDR6X")
+            return 3;
+
+        return 0;
+
     }
 
     public void setMemoryType(String memoryType) {

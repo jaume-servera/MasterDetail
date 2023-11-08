@@ -1,5 +1,6 @@
 package com.dam2023tfinal.jservera;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultCallback;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
@@ -16,6 +18,8 @@ import com.bumptech.glide.Glide;
 public class GpuAdapter extends RecyclerView.Adapter<GpuAdapter.GpuViewHolder> {
     private List<gpu> gpuList;
     private OnItemClickListener mListener;
+
+
 
     public interface OnItemClickListener {
         void onItemClick(int position);
@@ -35,6 +39,7 @@ public class GpuAdapter extends RecyclerView.Adapter<GpuAdapter.GpuViewHolder> {
 
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull GpuViewHolder holder, int position) {
         gpu currentGpu = gpuList.get(position);
@@ -45,7 +50,9 @@ public class GpuAdapter extends RecyclerView.Adapter<GpuAdapter.GpuViewHolder> {
         holder.editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), "Edit button clicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(v.getContext(), EditGpuActivity.class);
+                intent.putExtra("gpu", currentGpu);
+                v.getContext().startActivity(intent);
             }
         });
         // Load and set the GPU image using Glide

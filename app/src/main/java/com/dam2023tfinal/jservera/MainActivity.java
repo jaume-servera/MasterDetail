@@ -1,5 +1,6 @@
 package com.dam2023tfinal.jservera;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,13 +37,33 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
+    @SuppressLint("NotifyDataSetChanged")
     private final ActivityResultLauncher<Intent> startNewGpuActivityForResult =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-                if (result.getResultCode() == RESULT_OK) {
+                if (result.getResultCode() == 10) {
                     gpu newGpu = (gpu) result.getData().getSerializableExtra("gpu");
                     gpuList.add(newGpu);
                     adapter.notifyDataSetChanged();
                     Log.d(TAG, "onActivityResult: " + newGpu.getModel());
+                }
+                if (result.getResultCode() == 20) {
+                    gpu editedGpu = (gpu) result.getData().getSerializableExtra("gpu");
+                    int editedIndex = -1;
+                    for (int i = 0; i < gpuList.size(); i++) {
+                        if (gpuList.get(i).getId() == editedGpu.getId()) {
+                            editedIndex = i;
+                            break;
+                        }
+                    }
+
+                    if (editedIndex != -1) {
+                        // Replace the old object with the edited one
+                        gpuList.set(editedIndex, editedGpu);
+                        adapter.notifyDataSetChanged();
+                    } else {
+                        // Handle when the edited GPU is not found
+                        Log.e(TAG, "Edited GPU not found in the list");
+                    }
                 }
             });
 
@@ -93,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -123,18 +145,5 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
-
-    //Recover the gpu from the intent
-    ActivityResultCallback<Intent> resultCallback = new ActivityResultCallback<Intent>() {
-        @Override
-        public void onActivityResult(Intent result) {
-            gpu newGpu = (gpu) result.getExtras().getSerializable("gpu");
-            gpuList.add(newGpu);
-            adapter.notifyDataSetChanged();
-            Log.d(TAG, "onActivityResult: " + newGpu.getModel());
-
-        }
-    };
 
 }

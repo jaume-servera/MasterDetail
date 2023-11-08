@@ -2,11 +2,9 @@ package com.dam2023tfinal.jservera;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -14,13 +12,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.slider.Slider;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 
 public class NewGpuActivity extends AppCompatActivity {
@@ -49,7 +40,7 @@ public class NewGpuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.edit_layout);
+        setContentView(R.layout.create_layout);
 
         // Initialize UI elements
         modelName = findViewById(R.id.modelName);
@@ -104,7 +95,7 @@ public class NewGpuActivity extends AppCompatActivity {
 // After modifying the gpuList
         Intent resultIntent = new Intent();
         resultIntent.putExtra("gpu", newGpu);
-        setResult(RESULT_OK, resultIntent);
+        setResult(10, resultIntent);
 
         finish();
 
