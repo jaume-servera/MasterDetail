@@ -3,8 +3,11 @@ package com.dam2023tfinal.jservera;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
@@ -32,7 +35,12 @@ public class GpuAdapter extends RecyclerView.Adapter<GpuAdapter.GpuViewHolder> {
         // Set GPU name and price
         holder.gpuName.setText(currentGpu.getModel());
         holder.gpuPrice.setText(String.valueOf(currentGpu.getPrice()));
-
+        holder.editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), "Edit button clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
         // Load and set the GPU image using Glide
         //Glide.with(holder.itemView.getContext())
         //        .load(currentGpu.getImageUrl())  // Replace with the actual URL or resource for the GPU image
@@ -45,14 +53,16 @@ public class GpuAdapter extends RecyclerView.Adapter<GpuAdapter.GpuViewHolder> {
     }
 
     public class GpuViewHolder extends RecyclerView.ViewHolder {
-        
+
         public TextView gpuName, gpuPrice;
+        public Button editButton;
 
         public GpuViewHolder(View view) {
             super(view);
-            
+
             gpuName = view.findViewById(R.id.gpuName);
             gpuPrice = view.findViewById(R.id.gpuPrice);
+            editButton = view.findViewById(R.id.editButton);
         }
     }
 }

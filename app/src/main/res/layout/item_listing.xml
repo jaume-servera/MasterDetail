@@ -31,6 +31,14 @@
                 android:layout_height="wrap_content"
                 android:text="TextView"
                 android:textSize="24sp" />
+
+            <Button
+                android:id="@+id/editButton"
+                android:layout_width="111dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="240dp"
+                android:text="EDIT"
+                android:visibility="gone" />
         </LinearLayout>
     </LinearLayout>
 

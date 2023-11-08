@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -97,8 +98,16 @@ public class MainActivity extends AppCompatActivity {
                 startNewGpuActivityForResult.launch(intent);
                 return true;
             case R.id.action_edit:
-                // Handle the "Edit" button click
-                Toast.makeText(this, "Edit button clicked", Toast.LENGTH_SHORT).show();
+                //for each item in the recycler view, if editButton visibility is true, then set it to false and viceversa
+                for (int i = 0; i < recyclerView.getChildCount(); i++) {
+                    View view = recyclerView.getChildAt(i);
+                    Button editButton = view.findViewById(R.id.editButton);
+                    if (editButton.getVisibility() == View.VISIBLE) {
+                        editButton.setVisibility(View.GONE);
+                    } else {
+                        editButton.setVisibility(View.VISIBLE);
+                    }
+                }
                 return true;
             case R.id.listLenght:
                 Toast.makeText(this, "List lenght: " + gpuList.size(), Toast.LENGTH_SHORT).show();
@@ -122,5 +131,3 @@ public class MainActivity extends AppCompatActivity {
     };
 
 }
-
-
