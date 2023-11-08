@@ -32,12 +32,26 @@
                 android:text="TextView"
                 android:textSize="24sp" />
 
-            <Button
-                android:id="@+id/editButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Edit"
-                android:visibility="gone" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/editButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Edit"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/deleteButton"
+                    android:layout_width="51dp"
+                    android:layout_height="35dp"
+                    android:background="@android:drawable/ic_delete"
+                    android:visibility="gone" />
+
+            </LinearLayout>
 
         </LinearLayout>
     </LinearLayout>

@@ -41,23 +41,23 @@ public class ViewGpu extends AppCompatActivity {
         Log.d(TAG, gpu.toString());
 
         //Set the text views
-        setTextViewWithPlaceholder(modelName, gpu.getModel(), "Model");
-        setTextViewWithPlaceholder(manufacuturer, gpu.getManufacturer(), "Manufacturer");
-        setTextViewWithPlaceholder(launchDate, String.valueOf(gpu.getLaunchDate()), "Not Specified");
-        setTextViewWithPlaceholder(vramSize, String.valueOf(gpu.getMemorySize()), "N/A");
-        setTextViewWithPlaceholder(vramType, gpu.getMemoryType(), "Not Specified");
-        setTextViewWithPlaceholder(clockSpeed, String.valueOf(gpu.getCoreClockSpeed()), "N/A");
-        setTextViewWithPlaceholder(boostSpeed, String.valueOf(gpu.getBoostClockSpeed()), "N/A");
-        setTextViewWithPlaceholder(processingUnits, String.valueOf(gpu.getProcessingUnits()), "N/A");
-        setTextViewWithPlaceholder(TDP, String.valueOf(gpu.getTDP()), "N/A");
-        setTextViewWithPlaceholder(hdmiNumber, String.valueOf(gpu.getHdmiNumber()), "N/A");
-        setTextViewWithPlaceholder(displayPortNumber, String.valueOf(gpu.getDisplayPortNumber()), "N/A");
-        setTextViewWithPlaceholder(vgaNumber, String.valueOf(gpu.getVgaNumber()), "N/A");
-        setTextViewWithPlaceholder(dviNumber, String.valueOf(gpu.getDviNumber()), "N/A");
-        setTextViewWithPlaceholder(supportRayTracing, String.valueOf(gpu.isSupportRayTracing()), "N/A");
-        setTextViewWithPlaceholder(numberOfTransistors, String.valueOf(gpu.getNumberOfTransistors()), "N/A");
-        setTextViewWithPlaceholder(dimensions, gpu.getDimensions(), "Not Specified");
-        setTextViewWithPlaceholder(price, String.valueOf(gpu.getPrice()), "N/A");
+        setTextViewWithPlaceholder(modelName, "Model: " + gpu.getModel(), "Model");
+        setTextViewWithPlaceholder(manufacuturer, "Manufacturer: " + gpu.getManufacturer(), "Manufacturer");
+        setTextViewWithPlaceholder(launchDate, "Launch Date: " + String.valueOf(gpu.getLaunchDate()), "Not Specified");
+        setTextViewWithPlaceholder(vramSize, "Memory size: " + String.valueOf(gpu.getMemorySize()), "N/A");
+        setTextViewWithPlaceholder(vramType, "Memory type: " + gpu.getMemoryType(), "Not Specified");
+        setTextViewWithPlaceholder(clockSpeed, "CoreClock speed: " + String.valueOf(gpu.getCoreClockSpeed()), "N/A");
+        setTextViewWithPlaceholder(boostSpeed, "BoostClock speed: " + String.valueOf(gpu.getBoostClockSpeed()), "N/A");
+        setTextViewWithPlaceholder(processingUnits, "Processing units: " + String.valueOf(gpu.getProcessingUnits()), "N/A");
+        setTextViewWithPlaceholder(TDP, String.valueOf("TDP" + gpu.getTDP()), "N/A");
+        setTextViewWithPlaceholder(hdmiNumber, "Hdmi: " + String.valueOf(gpu.getHdmiNumber()), "N/A");
+        setTextViewWithPlaceholder(displayPortNumber, "Display Port: " + String.valueOf(gpu.getDisplayPortNumber()), "N/A");
+        setTextViewWithPlaceholder(vgaNumber, "VGA: " + String.valueOf(gpu.getVgaNumber()), "N/A");
+        setTextViewWithPlaceholder(dviNumber, "DVI: " + String.valueOf(gpu.getDviNumber()), "N/A");
+        setTextViewWithPlaceholder(supportRayTracing, "Ray Tracing: " + String.valueOf(gpu.isSupportRayTracing()), "N/A");
+        setTextViewWithPlaceholder(numberOfTransistors, "Num. transistors: " + String.valueOf(gpu.getNumberOfTransistors()), "N/A");
+        setTextViewWithPlaceholder(dimensions, "Dimensions: " + gpu.getDimensions(), "Not Specified");
+        setTextViewWithPlaceholder(price, "Avr. price: " + String.valueOf(gpu.getPrice() + "€"), "N/A");
 
     }
 
