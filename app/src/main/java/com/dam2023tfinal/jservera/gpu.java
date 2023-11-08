@@ -192,6 +192,10 @@ public class gpu implements Serializable {
                 ", boostClockSpeed=" + boostClockSpeed +
                 ", processingUnits=" + processingUnits +
                 ", TDP=" + TDP +
+                ", hdmiNumber=" + hdmiNumber +
+                ", displayPortNumber=" + displayPortNumber +
+                ", vgaNumber=" + vgaNumber +
+                ", dviNumber=" + dviNumber +
                 ", supportRayTracing=" + supportRayTracing +
                 ", numberOfTransistors=" + numberOfTransistors +
                 ", dimensions='" + dimensions + '\'' +

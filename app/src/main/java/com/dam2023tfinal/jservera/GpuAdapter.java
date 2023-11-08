@@ -15,6 +15,13 @@ import com.bumptech.glide.Glide;
 
 public class GpuAdapter extends RecyclerView.Adapter<GpuAdapter.GpuViewHolder> {
     private List<gpu> gpuList;
+    private OnItemClickListener mListener;
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+
 
     public GpuAdapter(List<gpu> gpuList) {
         this.gpuList = gpuList;
@@ -45,11 +52,21 @@ public class GpuAdapter extends RecyclerView.Adapter<GpuAdapter.GpuViewHolder> {
         //Glide.with(holder.itemView.getContext())
         //        .load(currentGpu.getImageUrl())  // Replace with the actual URL or resource for the GPU image
         //        .into(holder.gpuItemImage);
+
+        holder.itemView.setOnClickListener(v -> {
+            if (mListener != null) {
+                mListener.onItemClick(position);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return gpuList.size();
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
     }
 
     public class GpuViewHolder extends RecyclerView.ViewHolder {

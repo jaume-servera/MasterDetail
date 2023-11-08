@@ -60,6 +60,13 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
+        adapter.setOnItemClickListener(position -> {
+            Intent intent = new Intent(this, ViewGpu.class);
+            gpu clickedGpu = gpuList.get(position);
+            intent.putExtra("gpu", clickedGpu);
+            startActivity(intent);
+        });
+
 
         gpu demoGpu = createDemoGpu();
 
