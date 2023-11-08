@@ -105,6 +105,7 @@ public class NewGpuActivity extends AppCompatActivity {
         Intent resultIntent = new Intent();
         resultIntent.putExtra("gpu", newGpu);
         setResult(RESULT_OK, resultIntent);
+
         finish();
 
     }

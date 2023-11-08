@@ -98,7 +98,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.action_edit:
                 // Handle the "Edit" button click
-                Toast.makeText(this, "Edit button clicked", Toast.LENGTH_SHORT).show();
+
+
                 return true;
             case R.id.listLenght:
                 Toast.makeText(this, "List lenght: " + gpuList.size(), Toast.LENGTH_SHORT).show();
@@ -121,6 +122,11 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    public void startEditGpuActivity(int position) {
+        Intent intent = new Intent(this, NewGpuActivity.class);
+        intent.putExtra("gpu", gpuList.get(position));
+        startNewGpuActivityForResult.launch(intent);
+    }
 }
 
 
