@@ -1,5 +1,6 @@
 package com.dam2023tfinal.jservera;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,7 +42,7 @@ public class GpuAdapter extends RecyclerView.Adapter<GpuAdapter.GpuViewHolder> {
 
 
     @Override
-    public void onBindViewHolder(@NonNull GpuViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull GpuViewHolder holder, @SuppressLint("RecyclerView") int position) {
         gpu currentGpu = gpuList.get(position);
 
         // Set GPU name and price
@@ -59,7 +60,8 @@ public class GpuAdapter extends RecyclerView.Adapter<GpuAdapter.GpuViewHolder> {
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), "Delete button clicked", Toast.LENGTH_SHORT).show();
+                gpuList.remove(position);
+                notifyDataSetChanged();
             }
         });
 

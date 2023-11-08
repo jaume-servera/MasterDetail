@@ -90,13 +90,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         gpu demoGpu = createDemoGpu();
+       //  gpuList.add(demoGpu);
 
-        Log.d("MainActivity", "Before adding demoGpu to gpuList");
-        Log.d("MainActivity", "gpuList size: " + gpuList.size());
-        gpuList.add(demoGpu);
-
-        Log.d("MainActivity", "After adding demoGpu to gpuList");
-        Log.d("MainActivity", "gpuList size: " + gpuList.size());
         adapter.notifyDataSetChanged();
     }
 
@@ -107,8 +102,6 @@ public class MainActivity extends AppCompatActivity {
         testGpu.setPrice(329);
         testGpu.setMemorySize(12);
         testGpu.setMemoryType("gddr6");
-        testGpu.setCoreClockSpeed(1320);
-        testGpu.setBoostClockSpeed(1777);
         testGpu.setProcessingUnits(3584);
         testGpu.setTDP(170);
         testGpu.setHdmiNumber(1);

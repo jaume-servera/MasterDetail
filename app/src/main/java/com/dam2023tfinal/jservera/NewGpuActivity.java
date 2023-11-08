@@ -61,7 +61,7 @@ public class NewGpuActivity extends AppCompatActivity {
         switch1 = findViewById(R.id.switch1);
         editTransistorNumber = findViewById(R.id.editTransistorNumber);
         editDimensions = findViewById(R.id.editDimensions);
-        editTextNumber4 = findViewById(R.id.editTextNumber4);
+        editTextNumber4 = findViewById(R.id.avgPrice);
         saveButton = findViewById(R.id.saveButton);
 
 

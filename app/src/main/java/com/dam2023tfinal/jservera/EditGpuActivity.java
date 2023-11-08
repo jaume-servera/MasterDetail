@@ -62,7 +62,7 @@ public class EditGpuActivity extends AppCompatActivity {
         switch1 = findViewById(R.id.switch1);
         editTransistorNumber = findViewById(R.id.editTransistorNumber);
         editDimensions = findViewById(R.id.editDimensions);
-        editTextNumber4 = findViewById(R.id.editTextNumber4);
+        editTextNumber4 = findViewById(R.id.avgPrice);
         saveButton = findViewById(R.id.saveButton);
 
         // Get the selected GPU from the Intent
@@ -76,8 +76,8 @@ public class EditGpuActivity extends AppCompatActivity {
             vramSelector.setSelection(selectedGpu.getMemorySizeIndex());
             vramTypeSelector.setSelection(selectedGpu.getMemoryTypeIndex());
             clockSpeedSlider.setValue((float) selectedGpu.getCoreClockSpeed() == 0 ? (float) 1000.00 : (float) selectedGpu.getCoreClockSpeed());
-            clockSpeedValue.setText(String.valueOf(selectedGpu.getCoreClockSpeed()));
             boostSpeedSlider.setValue((float) selectedGpu.getBoostClockSpeed() == 0 ? (float) 1000.00 : (float) selectedGpu.getBoostClockSpeed());
+            clockSpeedValue.setText(String.valueOf(selectedGpu.getCoreClockSpeed()));
             boostSpeedValue.setText(String.valueOf(selectedGpu.getBoostClockSpeed()));
             editProcessingUnits.setText(String.valueOf(selectedGpu.getProcessingUnits()));
             editTDP.setText(String.valueOf(selectedGpu.getTDP()));
@@ -119,7 +119,14 @@ public class EditGpuActivity extends AppCompatActivity {
             selectedGpu.setSupportRayTracing(switch1.isChecked());
             selectedGpu.setNumberOfTransistors(Integer.parseInt(editTransistorNumber.getText().toString()));
             selectedGpu.setDimensions(editDimensions.getText().toString());
-            selectedGpu.setPrice(Integer.parseInt(editTextNumber4.getText().toString()));
+            selectedGpu.setPrice(Integer.parseInt(editTextNumber4.getText().toString().equals("") ? "0" : editTextNumber4.getText().toString()));
+            String selectedVram = vramSelector.getSelectedItem().toString();
+            if (!selectedVram.isEmpty()) {
+                selectedGpu.setMemorySize(Integer.parseInt(selectedVram));
+            } else {
+                // Handle the case when the selected value is empty
+                selectedGpu.setMemorySize(0);
+            }
 
             // Prepare the edited GPU to send back to the calling activity
             Intent resultIntent = new Intent();
