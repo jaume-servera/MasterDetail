@@ -12,6 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -29,6 +32,18 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private GpuAdapter adapter;
     private List<gpu> gpuList;
+
+    private static final String TAG = "MainActivity";
+
+    private final ActivityResultLauncher<Intent> startNewGpuActivityForResult =
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+                if (result.getResultCode() == RESULT_OK) {
+                    gpu newGpu = (gpu) result.getData().getSerializableExtra("gpu");
+                    gpuList.add(newGpu);
+                    adapter.notifyDataSetChanged();
+                    Log.d(TAG, "onActivityResult: " + newGpu.getModel());
+                }
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,39 +90,37 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_add:
                 // Handle the "Add" button click
-                // Start the new activity
+                // Start the new activity expecting a result
                 Intent intent = new Intent(this, NewGpuActivity.class);
-                intent.putExtra("gpuList", (ArrayList<gpu>) gpuList);
-                startActivity(intent);
-
+                gpu newGpu = new gpu();
+                intent.putExtra("gpu", newGpu);
+                startNewGpuActivityForResult.launch(intent);
                 return true;
-
             case R.id.action_edit:
                 // Handle the "Edit" button click
                 Toast.makeText(this, "Edit button clicked", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.listLenght:
+                Toast.makeText(this, "List lenght: " + gpuList.size(), Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == RESULT_OK) {
-            ArrayList<gpu> updatedList = data.getParcelableExtra("updatedGpuList");
+    //Recover the gpu from the intent
+    ActivityResultCallback<Intent> resultCallback = new ActivityResultCallback<Intent>() {
+        @Override
+        public void onActivityResult(Intent result) {
+            gpu newGpu = (gpu) result.getExtras().getSerializable("gpu");
+            gpuList.add(newGpu);
+            adapter.notifyDataSetChanged();
+            Log.d(TAG, "onActivityResult: " + newGpu.getModel());
 
-            if (updatedList != null) {
-                // Replace the original gpuList with the updated list
-                gpuList.clear();
-                gpuList.addAll(updatedList);
-
-                // Notify the adapter or update the UI as needed
-                adapter.notifyDataSetChanged();
-            }
         }
-    }
+    };
+
 }
 
 

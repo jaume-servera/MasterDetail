@@ -22,6 +22,7 @@ public class GpuAdapter extends RecyclerView.Adapter<GpuAdapter.GpuViewHolder> {
     public GpuViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_listing, parent, false);
         return new GpuViewHolder(itemView);
+
     }
 
     @Override

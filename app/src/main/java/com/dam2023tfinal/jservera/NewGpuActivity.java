@@ -86,29 +86,27 @@ public class NewGpuActivity extends AppCompatActivity {
     }
 
     private void saveGpuData() {
-        gpu newGpu = new gpu();
+        gpu newGpu = (gpu) getIntent().getExtras().getSerializable("gpu");
 
         newGpu.setModel(modelName.getText().toString());
         newGpu.setManufacturer(manufacturerSelector.getSelectedItem().toString());
-        newGpu.setMemorySize(Integer.parseInt(vramSelector.getSelectedItem().toString()));
+        newGpu.setMemorySize(vramSelector.getSelectedItem().toString().equals("") ? 0 : Integer.parseInt(vramSelector.getSelectedItem().toString()));;
         newGpu.setMemoryType(vramTypeSelector.getSelectedItem().toString());
         newGpu.setCoreClockSpeed(clockSpeedSlider.getValue());
         newGpu.setBoostClockSpeed(boostSpeedSlider.getValue());
-        newGpu.setProcessingUnits(Integer.parseInt(editProcessingUnits.getText().toString()));
-        newGpu.setTDP(Integer.parseInt(editTDP.getText().toString()));
-        newGpu.setHdmiNumber(Integer.parseInt(hdmiSelector.getSelectedItem().toString()));
+        newGpu.setProcessingUnits(editProcessingUnits.getText().toString().equals("") ? 0 : Integer.parseInt(editProcessingUnits.getText().toString()));
+        newGpu.setTDP(editTDP.getText().toString().equals("") ? 0 : Integer.parseInt(editTDP.getText().toString()));
+        newGpu.setHdmiNumber(hdmiSelector.getSelectedItem().toString().equals("") ? 0 : Integer.parseInt(hdmiSelector.getSelectedItem().toString()));
         newGpu.setDisplayPortNumber(Integer.parseInt(displayPortSelector.getSelectedItem().toString()));
-        newGpu.setVgaNumber(Integer.parseInt(vgaSelector.getSelectedItem().toString()));
-        newGpu.setDviNumber(Integer.parseInt(dviSelector.getSelectedItem().toString()));
+        newGpu.setVgaNumber(vgaSelector.getSelectedItem().toString().equals("") ? 0 : Integer.parseInt(vgaSelector.getSelectedItem().toString()));
+        newGpu.setDviNumber(dviSelector.getSelectedItem().toString().equals("") ? 0 : Integer.parseInt(dviSelector.getSelectedItem().toString()));
 
-        // After modifying the gpuList
+// After modifying the gpuList
         Intent resultIntent = new Intent();
-
-        List<gpu> gpuList = (List<gpu>) getIntent().getSerializableExtra("gpuList");
-        gpuList.add(newGpu);
-        resultIntent.putExtra("updatedGpuList", (ArrayList<gpu>) gpuList);
+        resultIntent.putExtra("gpu", newGpu);
         setResult(RESULT_OK, resultIntent);
         finish();
+
     }
 
 
