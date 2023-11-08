@@ -41,10 +41,26 @@ public class MainActivity extends AppCompatActivity {
     private final ActivityResultLauncher<Intent> startNewGpuActivityForResult =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
                 if (result.getResultCode() == 10) {
+                    for (int i = 0; i < recyclerView.getChildCount(); i++) {
+                        View view = recyclerView.getChildAt(i);
+                        Button editButton = view.findViewById(R.id.editButton);
+                        if (editButton.getVisibility() == View.VISIBLE) {
+                            editButton.setVisibility(View.GONE);
+                        }
+                    }
+
+                    for (int i = 0; i < recyclerView.getChildCount(); i++) {
+                        View view = recyclerView.getChildAt(i);
+                        Button deleteButton = view.findViewById(R.id.deleteButton);
+                        if (deleteButton.getVisibility() == View.VISIBLE) {
+                            deleteButton.setVisibility(View.GONE);
+                        }
+                    }
                     gpu newGpu = (gpu) result.getData().getSerializableExtra("gpu");
                     gpuList.add(newGpu);
                     adapter.notifyDataSetChanged();
                     Log.d(TAG, "onActivityResult: " + newGpu.getModel());
+
                 }
                 if (result.getResultCode() == 20) {
                     gpu editedGpu = (gpu) result.getData().getSerializableExtra("gpu");
