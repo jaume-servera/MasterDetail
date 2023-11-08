@@ -41,17 +41,20 @@ public class GpuAdapter extends RecyclerView.Adapter<GpuAdapter.GpuViewHolder> {
 
         // Set GPU name and price
         holder.gpuName.setText(currentGpu.getModel());
-        holder.gpuPrice.setText(String.valueOf(currentGpu.getPrice()));
+        holder.gpuPrice.setText(String.valueOf(currentGpu.getPrice() + "€"));
         holder.editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(v.getContext(), "Edit button clicked", Toast.LENGTH_SHORT).show();
             }
         });
-        // Load and set the GPU image using Glide
-        //Glide.with(holder.itemView.getContext())
-        //        .load(currentGpu.getImageUrl())  // Replace with the actual URL or resource for the GPU image
-        //        .into(holder.gpuItemImage);
+        
+        holder.deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), "Delete button clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         holder.itemView.setOnClickListener(v -> {
             if (mListener != null) {
@@ -73,6 +76,7 @@ public class GpuAdapter extends RecyclerView.Adapter<GpuAdapter.GpuViewHolder> {
 
         public TextView gpuName, gpuPrice;
         public Button editButton;
+        public Button deleteButton;
 
         public GpuViewHolder(View view) {
             super(view);
@@ -80,6 +84,7 @@ public class GpuAdapter extends RecyclerView.Adapter<GpuAdapter.GpuViewHolder> {
             gpuName = view.findViewById(R.id.gpuName);
             gpuPrice = view.findViewById(R.id.gpuPrice);
             editButton = view.findViewById(R.id.editButton);
+            deleteButton = view.findViewById(R.id.deleteButton);
         }
     }
 }

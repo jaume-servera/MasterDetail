@@ -76,7 +76,7 @@ public class NewGpuActivity extends AppCompatActivity {
 
 
 
-        // Set up a click listener for the Save button
+        // click listener for the Save button
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,7 +101,6 @@ public class NewGpuActivity extends AppCompatActivity {
         newGpu.setVgaNumber(vgaSelector.getSelectedItem().toString().equals("") ? 0 : Integer.parseInt(vgaSelector.getSelectedItem().toString()));
         newGpu.setDviNumber(dviSelector.getSelectedItem().toString().equals("") ? 0 : Integer.parseInt(dviSelector.getSelectedItem().toString()));
 
-// After modifying the gpuList
         Intent resultIntent = new Intent();
         resultIntent.putExtra("gpu", newGpu);
         setResult(RESULT_OK, resultIntent);

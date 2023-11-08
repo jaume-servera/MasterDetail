@@ -81,8 +81,18 @@ public class MainActivity extends AppCompatActivity {
 
     private gpu createDemoGpu() {
         gpu testGpu = new gpu();
-        testGpu.setModel("Demo GPU Model");
-        testGpu.setManufacturer("Demo Manufacturer");
+        testGpu.setModel("rtx 3060");
+        testGpu.setManufacturer("nvidia");
+        testGpu.setPrice(329);
+        testGpu.setMemorySize(12);
+        testGpu.setMemoryType("gddr6");
+        testGpu.setCoreClockSpeed(1320);
+        testGpu.setBoostClockSpeed(1777);
+        testGpu.setProcessingUnits(3584);
+        testGpu.setTDP(170);
+        testGpu.setHdmiNumber(1);
+        testGpu.setDisplayPortNumber(3);
+        testGpu.setVgaNumber(0);
 
         return testGpu;
     }
@@ -115,6 +125,17 @@ public class MainActivity extends AppCompatActivity {
                         editButton.setVisibility(View.VISIBLE);
                     }
                 }
+
+                for (int i = 0; i < recyclerView.getChildCount(); i++) {
+                    View view = recyclerView.getChildAt(i);
+                    Button deleteButton = view.findViewById(R.id.deleteButton);
+                    if (deleteButton.getVisibility() == View.VISIBLE) {
+                        deleteButton.setVisibility(View.GONE);
+                    } else {
+                        deleteButton.setVisibility(View.VISIBLE);
+                    }
+                }
+
                 return true;
             case R.id.listLenght:
                 Toast.makeText(this, "List lenght: " + gpuList.size(), Toast.LENGTH_SHORT).show();
